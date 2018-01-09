@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> vue-study 1회차 계산기 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="app" class="flex-container flex-center-align">
+        <div class="shape-wrapper flex-container flex-center-align">
+            <div class="shape">
+                <div class="display-wrapper">
+                    <display-component
+                        :string-data="stringData">
+                    </display-component>
+                </div>
+                <div class="button-contents-wrapper">
+                    <ul class="button-contents">
+                        <li v-for="(order, index) in orderList">
+                            <button-component
+                                :title='order'
+                                :add-stack-list='addStackList'
+                                :make-string='makeString'
+                                :reset='reset'
+                                :calculate='calculate'
+                                :index="index">
+                            </button-component>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./../commons/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
