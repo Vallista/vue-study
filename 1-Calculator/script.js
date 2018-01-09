@@ -67,15 +67,16 @@ new Vue({
     methods: {
         // 배열에 저장
         addStackList: function(func) {
+            const last = this.calculateStack.length - 1;
             // 처음 입력받는게 연산자이거나 이미 연산자가 있는데 연산자를 한번더 등록하면 푸쉬 못하도록 리턴
-            if((this.calculateStack[this.calculateStack.length - 1] === undefined &&
+            if((this.calculateStack[last] === undefined &&
                 (func === '%' || func === '+' || func === '-' || func === '*' || func === '/') === false) === false
                 && ((func === '%' || func === '+' || func === '-' || func === '*' || func === '/') === true &&
-                (this.calculateStack[this.calculateStack.length - 1] === '%'
-                || this.calculateStack[this.calculateStack.length - 1] === '+'
-                || this.calculateStack[this.calculateStack.length - 1] === '*'
-                || this.calculateStack[this.calculateStack.length - 1] === '-'
-                || this.calculateStack[this.calculateStack.length - 1] === '/') === true) === true)
+                (this.calculateStack[last] === '%'
+                || this.calculateStack[last] === '+'
+                || this.calculateStack[last] === '*'
+                || this.calculateStack[last] === '-'
+                || this.calculateStack[last] === '/') === true) === true)
                 return;
 
             this.calculateStack.push(func);
@@ -87,12 +88,13 @@ new Vue({
         },
         // = 누를시 연산
         calculate: function() {
+            const last = this.calculateStack.length - 1;
             // 만약 마지막 값이 연산자의 경우 맨 뒤 연산자를 삭제하고 결과 값 도출
-            if((this.calculateStack[this.calculateStack.length - 1] === '%'
-            || this.calculateStack[this.calculateStack.length - 1] === '+'
-            || this.calculateStack[this.calculateStack.length - 1] === '*'
-            || this.calculateStack[this.calculateStack.length - 1] === '-'
-            || this.calculateStack[this.calculateStack.length - 1] === '/') === true)
+            if((this.calculateStack[last] === '%'
+            || this.calculateStack[last] === '+'
+            || this.calculateStack[last] === '*'
+            || this.calculateStack[last] === '-'
+            || this.calculateStack[last] === '/') === true)
                 this.calculateStack.pop();
 
             this.makeString();
