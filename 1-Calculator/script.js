@@ -29,10 +29,14 @@ Vue.component('button-component', {
     },
     methods: {
         clickEvent: function() {
+            // = 누를시
             if(this.name === '=') this.calculate();
+            // AC 누를시
             else if (this.name === 'AC') this.reset();
+            // 숫자, 연산자 누를시
             else if (this.name !== '') this.addStackList(this.name);
 
+            // 디스플레이에서 결과 도출하도록 String으로 결과 만듬.
             this.makeString();
         }
     }
@@ -61,15 +65,9 @@ new Vue({
         };
     },
     methods: {
-        splitMulti: function (str, tokens) {
-            var tempChar = tokens[0]; // We can use the first token as a temporary join character
-            for(var i = 0; i < tokens.length; i++){
-                str = str.split(tokens[i]).join(tempChar);
-            }
-            str = str.split(tempChar);
-            return str;
-        },
+        // 배열에 저장
         addStackList: function(func) {
+            // 처음 입력받는게 연산자이거나 이미 연산자가 있는데 연산자를 한번더 등록하면 푸쉬 못하도록 리턴
             if((this.calculateStack[this.calculateStack.length - 1] === undefined &&
                 (func === '%' || func === '+' || func === '-' || func === '*' || func === '/') === false) === false
                 && ((func === '%' || func === '+' || func === '-' || func === '*' || func === '/') === true &&
@@ -82,11 +80,14 @@ new Vue({
 
             this.calculateStack.push(func);
         },
+        // String 으로 만들어줌
         makeString: function() {
             this.stringData = '';
-            for(var data in this.calculateStack) {this.stringData += this.calculateStack[data];};
+            for(var data in this.calculateStack) {this.stringData += this.calculateStack[data];}
         },
+        // = 누를시 연산
         calculate: function() {
+            // 만약 마지막 값이 연산자의 경우 맨 뒤 연산자를 삭제하고 결과 값 도출
             if((this.calculateStack[this.calculateStack.length - 1] === '%'
             || this.calculateStack[this.calculateStack.length - 1] === '+'
             || this.calculateStack[this.calculateStack.length - 1] === '*'
@@ -98,6 +99,7 @@ new Vue({
             this.reset();
             this.calculateStack.push(eval(this.stringData).toString());
         },
+        // 초기화
         reset: function() {
             this.calculateStack = [];
         }
