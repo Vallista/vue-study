@@ -27,29 +27,20 @@ Vue.component('alert-box-list', {
         return {
             alertList: {
                 type: Array
-            },
-            stringData: {
-                type: String
             }
         };
     },
     methods: {
         addAlert: function({ title, description }) {
-            this.stringData = '';
-            this.alertList.push('<alert-box v-bind:title="title" v-bind:description="description"></alert-box>');
-            for(var i = 0; i < this.alertList.length; i++) {
-                this.stringData += this.alertList[i];
-            }
-
-            console.log(this.stringData);
+            this.alertList.push({ title, description });
+            console.log(this.alertList);
         }
     },
     created: function() {
         this.alertList = [];
-        this.stringData = '';
         EventBus.$on('addAlert', this.addAlert);
     },
-    template: '<div>{{this.stringData}}</div>'
+    template: '<ul><li v-for="alert in alertList"><alert-box :title="alert.title" :description="alert.description"></alert-box></li></ul>'
 });
 
 var EventBus = new Vue();
