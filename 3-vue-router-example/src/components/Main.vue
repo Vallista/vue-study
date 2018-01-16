@@ -15,7 +15,7 @@
     },
     data() {
       return {
-        path: this.randomLocation(0, 100),
+        path: this.randomLocation(0, 1),
       };
     },
   };

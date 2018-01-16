@@ -1,6 +1,8 @@
 <template>
-  <div class="flex-container flex-center-sort">
-    <p>Page {{$route.params.post}}</p>
+  <div class="flex-container flex-center-sort flex-column">
+    <p class="title">{{ this.list[$route.params.post].title }}</p>
+    <hr />
+    <p class="description">{{ this.list[$route.params.post].description }}</p>
   </div>
 </template>
 
@@ -9,16 +11,10 @@
 
   export default {
     name: 'Page',
-    components: {
-
-    },
     data() {
       return {
         list: Data,
       }
-    },
-    created() {
-      console.log(this.list);
     },
   };
 </script>
@@ -26,6 +22,18 @@
 <style scoped>
   p {
     color: white;
-    font-size: 100px;
+  }
+
+  hr {
+    width: 200px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .description {
+    font-size: 20px;
+    width: 500px;
   }
 </style>

@@ -29,6 +29,10 @@ export default {
   align-items: center;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 a {
   background-color: white;
   text-decoration: none;
